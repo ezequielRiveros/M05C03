@@ -22,9 +22,9 @@
 						<figure class="product-box_image">
 							<img src="/images/products/<%element.image %>" alt="imagen de producto">
 						</figure>
-						<%const toThousand = n =>n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".";%>
+						<%const toThousand = n =>n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".");%>
 						<article class="product-box_data">
-							<% let finalPrice= product.price -product.price *product.discount /100; finalPrice= toThousand(finalPrice));%>
+							<% let finalPrice= element.price -element.price *product.discount /100; finalPrice= toThousand(finalPrice);%>
 							<h2>$<%= finalPrice %></h2>
 							<span><%element.discount %> OFF</span>
 							<p><%element.name %></p>

@@ -38,14 +38,16 @@ const controller = {
 	// Create -  Method to store
 	store: (req, res) => {
 		let newProduct={...productSkeleton,...req.body}
-		lastProduct =products.length-1
+		let lastProduct =products.length-1
 		if(lastProduct !== -1){
-			let lastProduct= products[lastProduct]
+			lastProduct= products[lastProduct]
 			newProduct.id= lastProduct.id+1
 		}
+		newProduct.image=req.files[0].filename
+		console.log("el nombre dle file en create es "+ newProduct.image)
 		products.push(newProduct)
-		fs.appendFileSync(productsFilePath, JSON.stringify(newProduct))
-		res.render("products.ejs",{'products':products})
+		fs.writeFileSync(productsFilePath, JSON.stringify(products))
+		res.render("results.ejs",{'product':newProduct})
 	},
 
 	// Update - Form to edit
@@ -60,9 +62,10 @@ const controller = {
 		product.discount=req.body.discount
 		product.category=req.body.category
 		product.description=req.body.description
-		product.image=req.body.image
+
+		product.image=req.files[0].filename
 		fs.writeFileSync(productsFilePath, JSON.stringify(products))
-		res.render("products.ejs",{'products':products})
+		res.render("results.ejs",{'product':product})
 	},
 
 	// Delete - Delete one product from DB

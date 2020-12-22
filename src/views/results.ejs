@@ -25,10 +25,17 @@
 								<img src="/images/products/<%= product.image%>" alt="imagen de producto">
 							</figure>
 							<article class="product-box_data">
-								<% let finalPrice= product.price -product.price *product.discount /100; const toThousand = n =>n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".");  finalPrice= toThousand(finalPrice);%>
-								<h2>$<%= finalPrice %></h2>
-								<span><%= product.discount%>% OFF</span>
+								
+								<% if (product.discount) {%>
+									<% let finalPrice= product.price -product.price *product.discount /100; const toThousand = n =>n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".");  finalPrice= toThousand(finalPrice);%>
+									<h2>$<%= finalPrice %></h2>
+									<span><%= product.discount%>% OFF</span>
+									<%} %> 
+									<% if (!product.discount) {%>
+										<h2>$<%= toThousand(product.price)  %></h2>
+									<%} %> 
 								<p><%= product.name%></p>
+								<p><%= product.description %></p>
 								<i class="fas fa-truck"></i>
 							</article>
 						</a>

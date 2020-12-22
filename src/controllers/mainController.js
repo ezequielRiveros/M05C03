@@ -11,7 +11,7 @@ const controller = {
 	index: (req, res) => {
 		let visited =[]
 		let insale =[]
-		console.log(typeof products)
+		products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 		products.forEach(product => {
 			if(product.category === "visited"){
 				visited.push(product)
